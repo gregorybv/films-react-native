@@ -1,32 +1,42 @@
 import React from "react"
-import { SafeAreaView, ImageBackground, Flatlist } from "react-native"
+import { SafeAreaView, ImageBackground, Flatlist, Text } from "react-native"
+import Form from "../components/Form"
 import Header from "../components/Header"
 import TodoItem from "../components/TodoItem"
 
 export default function Todo() {
-  const [todoItems, setTodoItems] = React.useState([
-    { id: 1, text: "React Native 1" },
-    { id: 2, text: "React Native 2" },
-    { id: 3, text: "React Native 3" },
-  ])
+  const [todoItems, setTodoItems] = React.useState([])
 
   const addTodo = (newItem) => {
     setTodoItems([...todoItems, { ...newItem }])
   }
 
+  const deleteTodo = (id) => {
+    setTodoItems((newList) => {
+      return newList.filter((todoItems) => id !== todoItems.id)
+    })
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header />
+
       <ImageBackground
         source={{
           uri: "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg",
         }}
         style={{ flex: 1 }}
       >
+        <Form addTodo={addTodo} />
+
+        {todoItems.length ? <Text>Всего: [{todoItems.length}]</Text> : null}
+
         <Flatlist
           data={todoItems}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TodoItem item={item} />}
+          renderItem={({ item }) => (
+            <TodoItem item={item} deleteTodo={deleteTodo} />
+          )}
         />
       </ImageBackground>
     </SafeAreaView>

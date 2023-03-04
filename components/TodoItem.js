@@ -1,9 +1,10 @@
 import { Text, TouchableOpacity, View } from "react-native"
 import React from "react"
 
-const TodoItem = ({ item }) => {
+const TodoItem = ({ item, deleteTodo }) => {
   return (
     <TouchableOpacity
+      onLongPress={() => deleteTodo(item.id)}
       style={{
         justifyContent: "space-between",
         alignItems: "center",
@@ -21,7 +22,7 @@ const TodoItem = ({ item }) => {
       >
         {item.text}
       </Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => deleteTodo(item.id)}>
         <Text>&#128465;</Text>
       </TouchableOpacity>
     </TouchableOpacity>
