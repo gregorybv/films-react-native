@@ -1,6 +1,7 @@
 import React from "react"
-import { SafeAreaView, Text, View, ImageBackground } from "react-native"
+import { SafeAreaView, ImageBackground, Flatlist } from "react-native"
 import Header from "../components/Header"
+import TodoItem from "../components/TodoItem"
 
 export default function Todo() {
   const [todoItems, setTodoItems] = React.useState([
@@ -8,6 +9,10 @@ export default function Todo() {
     { id: 2, text: "React Native 2" },
     { id: 3, text: "React Native 3" },
   ])
+
+  const addTodo = (newItem) => {
+    setTodoItems([...todoItems, { ...newItem }])
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -17,7 +22,13 @@ export default function Todo() {
           uri: "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg",
         }}
         style={{ flex: 1 }}
-      ></ImageBackground>
+      >
+        <Flatlist
+          data={todoItems}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <TodoItem item={item} />}
+        />
+      </ImageBackground>
     </SafeAreaView>
   )
 }
