@@ -3,12 +3,11 @@ import { SafeAreaView, Text, View, ImageBackground } from "react-native"
 import Header from "../components/Header"
 
 export default function Todo() {
-
-const [todoItems, setTodoItems] = React.useState([
-  {id: 1, text: 'React Native 1'}
-  {id: 2, text: 'React Native 2'}
-  {id: 3, text: 'React Native 3'}
-])
+  const [todoItems, setTodoItems] = React.useState([
+    { id: 1, text: "React Native 1" },
+    { id: 2, text: "React Native 2" },
+    { id: 3, text: "React Native 3" },
+  ])
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
