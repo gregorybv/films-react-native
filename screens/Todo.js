@@ -1,5 +1,5 @@
 import React from "react"
-import { SafeAreaView, ImageBackground, Flatlist, Text } from "react-native"
+import {SafeAreaView, ImageBackground, Text, FlatList} from "react-native"
 import Form from "../components/Form"
 import Header from "../components/Header"
 import TodoItem from "../components/TodoItem"
@@ -31,7 +31,8 @@ export default function Todo() {
 
         {todoItems.length ? <Text>Всего: [{todoItems.length}]</Text> : null}
 
-        <Flatlist
+
+        <FlatList
           data={todoItems}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
